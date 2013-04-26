@@ -1,21 +1,37 @@
 <?php
+/*
+    wobble - another php web framework... 
+    Copyright (C) 2013  David Lenwell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /**
  * Image class file
- *
- * @author	David Lenwell
- * @date	May 30, 2006
- * @file	Image.php
- */
-
-/*
  * The Image class is used to manipulate images
  *
  * This class wraps the PHP image manipulation functions. All manipulations are cached until the Display or Write methods
  * are called, allowing the caller to perform multiple nested operations before retrieving the final image. If PHP is compiled
  * with the support, the class will dynamically reallocate memory in PHP to circumvent 'out of memory' errors most of the 
  * time.
+ *
+ * @author	David Lenwell
+ * @date	May 30, 2006
+ * @file	Image.php
  */
-class Image_d {
+
+class Image {
 	
 	/**
 	 * Default assumed values. These exist to ensure no zeroes are used during memory calculation during dynamic 
@@ -34,8 +50,8 @@ class Image_d {
 	/**
 	 * Private image data used to calculate memory usage
 	 */
-	private $bits = Image_d::DEFAULT_BITS; 
-	private $channels = Image_d::DEFAULT_CHANNEL;
+	private $bits = Image::DEFAULT_BITS; 
+	private $channels = Image::DEFAULT_CHANNEL;
 	
 	/**
 	 * GD resource cache
@@ -78,8 +94,8 @@ class Image_d {
 		$this->x = 				NULL;
 		$this->y = 				NULL;
 		$this->type = 			NULL;
-		$this->bits = 			Image_d::DEFAULT_BITS;
-		$this->channels = 		Image_d::DEFAULT_CHANNEL;
+		$this->bits = 			Image::DEFAULT_BITS;
+		$this->channels = 		Image::DEFAULT_CHANNEL;
 		$this->resourceCache =	NULL;
 
 		if($image) {

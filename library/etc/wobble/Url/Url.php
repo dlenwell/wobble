@@ -1,20 +1,38 @@
 <?php
+/*
+    wobble - another php web framework... 
+    Copyright (C) 2013  David Lenwell
 
-/**
-* Auth_d 
-* 
-*
-* @file			Uri_d.php
-* @author		David Lenwell
-* @package		Uri_d
-* @subpackage	D_lib 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+* Url 
+* 
+*
+* @file			Url.php
+* @author		David Lenwell
+* @package		Url
+* @subpackage	wobble 
+*/
 
-class Uri_d {
+class Url {
 	// set up 
 	public $slot = array();
 	public $uri ;
+	
+	
 	/**
 	 * __construct method
 	 *
@@ -46,15 +64,13 @@ class Uri_d {
 	 */
 	private function _parse() {
 		$this->slot = split('[/]',$this->uri);
-		//echo $uri;
-		//echo count($this->items);
 	} 
 	
 	
 	/**
 	 * __destruct method
 	 *
-	 * checks for an existing connection to this host... if is not there it creates it. 
+	 * 
 	 *
 	 * @param	void
 	 * @return 	void	 
@@ -64,12 +80,6 @@ class Uri_d {
 		
 	
 	}
-	
-	
-
-	
-	
-	
 	
 	
 }

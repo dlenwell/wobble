@@ -1,17 +1,34 @@
 <?php
+/*
+    wobble - another php web framework... 
+    Copyright (C) 2013  David Lenwell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /**
-* Auth_d 
+* Auth
 * 
 * @note			Redesigned to be more passive.
-* @file			Auth_d.php
+* @file			Auth.php
 * @author		David Lenwell
-* @package		Auth_d
-* @subpackage	D_lib 
+* @package		Auth
+* @ 
 */
-include_once $config->LIB_PATH."d_lib/Mysql_d/Mysql_d.php";
+include_once $config->LIB_PATH."Mysql/Mysql.php";
 
-class Auth_d {
+class Auth {
 	// public variables 
 	public $status = false;
 	public $status_text = "Please Login To See This Page!";
@@ -60,7 +77,7 @@ class Auth_d {
 				// someone is logging in .. lets check it against the database 
 				//echo " - user is trying to log in! <br>";
 				
-				$d = new Mysql_d();
+				$d = new Mysql();
 				
 				$where_string = "WHERE email= '" . $_REQUEST['email'] . "' AND password_hash = '" . md5($_REQUEST['password']) . "'";
 				
@@ -92,14 +109,24 @@ class Auth_d {
 		
 	} 
 	
+	/**
+	 * OutputLogin method
+	 *
+	 * out puts the loging 
+	 *
+	 * @param	void
+	 * @return 	void	 
+	 * 
+	 */
 	public function OutputLogin()
 	{
 		
-		$template = new Template_d('login.html');	
+		$template = new Template('login.html');	
 		$template->Set('status_text', $this->status_text);
 		
 		return $template->Output();
 	}
+	
 	/**
 	 * __destruct method
 	 *

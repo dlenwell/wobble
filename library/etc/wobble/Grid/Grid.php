@@ -1,19 +1,36 @@
 <?php 
+/*
+    wobble - another php web framework... 
+    Copyright (C) 2013  David Lenwell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /**
-* class Grid_d
+* class Grid
 * 
-* @file			Grid_d.php
+* @file			Grid.php
 * @author		David Lenwell
-* @package		Repeater_d
-* @subpackage	D_lib 
+* @package		Grid
+* @subpackage	wobble 
 **/
 
 
 /** 
- *  Grid_d
+ *  Grid
  */
-class Grid_d 
+class Grid
 {	
 	// parameters array 
 	private $params = array();	
@@ -46,12 +63,12 @@ class Grid_d
 	 */
 	public function Output($from, $table, $where = '')  {
 		global $config; 
-		include_once $config->LIB_PATH."d_lib/Mysql_d/Mysql_d.php";	
+		
 		// need a db object 
-		$data = New Mysql_d();
+		$data = New Mysql();
 		
 		// header 
-		$header_template = new Template_d($this->params['templateSet'].'/header.html',$this->params['templatePath'] );
+		$header_template = new Template($this->params['templateSet'].'/header.html',$this->params['templatePath'] );
 		$header_template->Set('GridName',$this->params['gridName']);
 			
 		// sorting links 
@@ -84,13 +101,13 @@ class Grid_d
 			}
 		}
 	
-		$ReturnVal .= $header_template->Output();
+		$return_val .= $header_template->Output();
 	
 		// defualt counter for checking odd numbered rows .. CHANGE THIS ITS STUPID!!
 		$counter = 1; 	
 		
 		// build the body 
-		$row_template = new Template_d($this->params['templateSet'].'/row.html',$this->params['templatePath'] );
+		$row_template = new Template($this->params['templateSet'].'/row.html',$this->params['templatePath'] );
 		
 		$results = $data->Execute('SELECT', $from.' FROM '.$table, $where.$orderby.$limit);
 
@@ -107,16 +124,16 @@ class Grid_d
 				$row_template->Set('GridName',$this->params['gridName']);
 				$counter = $counter + 1;
 			}
-			$ReturnVal .= $row_template->Output();
+			$return_val .= $row_template->Output();
 		}
 		// add the footer
-		$footer_template = new Template_d($this->params['templateSet'].'/footer.html',$this->params['templatePath'] );
+		$footer_template = new Template($this->params['templateSet'].'/footer.html',$this->params['templatePath'] );
 		
 		$footer_template->Set('PageLinks', $pageLinks);
 		$footer_template->Set('count', $recordCount);
 	
-		$ReturnVal .= $footer_template->Output();
-		return($ReturnVal) ;
+		$return_val .= $footer_template->Output();
+		return($return_val) ;
 	
 	}
 	
@@ -127,11 +144,11 @@ class Grid_d
 	 * @return	string	limit clause
 	 */
 	private function build_limit() {
-		$returnVal = ' LIMIT ';
-		$returnVal .= $this->current_page() * $this->params['pageLimit'] - $this->params['pageLimit'].', ';
-		$returnVal .= $this->params['pageLimit'];
+		$return_val = ' LIMIT ';
+		$return_val .= $this->current_page() * $this->params['pageLimit'] - $this->params['pageLimit'].', ';
+		$return_val .= $this->params['pageLimit'];
 		
-		return($returnVal);
+		return($return_val);
 	}
 	
 	/**
