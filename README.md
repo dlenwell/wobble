@@ -1,4 +1,6 @@
-wobble - another php web framework... 
+wobble
+======
+    another php web framework... 
     Copyright (C) 2013  David Lenwell
 
     This program is free software: you can redistribute it and/or modify
@@ -13,3 +15,8 @@ wobble - another php web framework...
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Install Instructions
+
+    1. boom 
+    2. Bang

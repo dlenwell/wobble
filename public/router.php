@@ -15,6 +15,11 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
+    
+    router.php
+    
+    
 */
 
 session_start();
@@ -24,17 +29,17 @@ include_once "../config.php";
 $config = new config();
 
 //Load the dependant classes 
-include_once $config->LIB_PATH."d_lib/Template_d/Template_d.php";
-include_once $config->LIB_PATH."d_lib/Uri_d/Uri_d.php";
-include_once $config->LIB_PATH."d_lib/Auth_d/Auth_d.php";
+include_once $config->LIB_PATH."/Template/Template.php";
+include_once $config->LIB_PATH."/Url/Url.php";
+include_once $config->LIB_PATH."/Auth/Auth.php";
 
 //load auth
-$AUTH = new Auth_d();
+$AUTH = new Auth();
 // parse uri 
-$URI = new Uri_d();
+$URL = new Url();
 
 // load module
-if ($URI->slot[1] != '')
+if ($URL->slot[1] != '')
 {
 	$requested_module = $URI->slot[1];
 } else { 
@@ -49,13 +54,13 @@ if (! in_array($requested_module, $config->MODULES))
 }
 
 // include the parent module 
-include_once $config->LIB_PATH.'modules/module.php';
+include_once $config->BASE_PATH.'/modules/module.php';
 // include the correct module files
-include_once $config->LIB_PATH.'modules/'.$requested_module."/".$requested_module.".php";
+include_once $config->BASE_PATH.'/modules/'.$requested_module."/".$requested_module.".php";
 
 $module = new $requested_module();
 
-// final output 
+// final output
 $template = new Template_d($module->master_page, $module->master_page_path);	
 
 // have to call the content output first because it can effect the other values 
@@ -65,14 +70,14 @@ if ($requested_module == 'admin')
 {
 	$admin_module = $module ;
 } else { 
-	include_once $config->LIB_PATH.'modules/admin/admin.php';
+	include_once $config->BASE_PATH.'/modules/admin/admin.php';
 	$admin_module = new admin();
 }
 
 //$main_navigation = $admin_module->OutputNavigation();
 
 //$template->Set('main_navigation',$main_navigation);
-$template->Set('current_page',$URI->slot[2]);
+$template->Set('current_page',$URL->slot[2]);
 $template->Set('form_action',$module->form_action);
 $template->Set('keywords',$module->meta_keywords);
 $template->Set('description',$module->meta_description);
