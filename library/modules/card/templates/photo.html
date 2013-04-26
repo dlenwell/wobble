@@ -1,0 +1,201 @@
+<script>
+	var isPhoto = 'true' ; 
+	
+	function gettingPhoto (status)
+	{
+		//if (status != isPhoto) 
+		//{
+			isPhoto == status ;
+			if (status == 'true')
+			{
+				Effect.BlindDown('upload_area', { duration: 0.3 });
+				Effect.BlindUp('no_upload_area', { duration: 0.3 });
+				
+				$('card_without').style.display = 'none';
+				$('card_with').style.display = 'block';
+				
+			} else { 
+				Effect.BlindDown('no_upload_area', { duration: 0.3 });
+				Effect.BlindUp('upload_area', { duration: 0.3 });
+				
+				 document.mainForm.action = "/card/finish/without";
+				
+				$('card_without').style.display = 'block';
+				$('card_with').style.display = 'none';
+			}
+		//}		
+	}
+	
+	
+	
+
+</script>
+<div style="padding-top:20px; ">
+	<h1>Step 2 > Photo</h1>
+	<table width="100%">
+		<tr>
+			<td valign="top" width="380">
+				<style> 
+					input
+					{
+						padding: 5px;
+					}
+				
+				</style>
+				<div>
+					<div><b>Would you like to include a photo for an additional $5? </b></div>
+					<br/>
+					
+					<input type="radio" name="photo_question" value="yes" checked onclick="gettingPhoto('true');">Yes
+					<input type="radio" name="photo_question" value="no"  onclick="gettingPhoto('false');">No
+					
+					<br>
+					<p>
+						* Photos Must be jpeg format.<br>
+						* Under 2 Megabytes. 	
+					</p>
+					<br>
+					<div id="upload_area">
+						<div class="inner">
+							<input type="file" name="file" id="file" /><br>
+							<input type="hidden" name="poo" id="poo" /><br><br>
+							<input type="submit" name="submit" value="Upload Image >>" />
+						</div>
+					</div>
+					<div id="no_upload_area" style="display: none;">
+						<br><br><input type="submit" value="Next >>">
+					</div>					
+					
+					
+					
+				</div>
+			</td>
+			<td valign="top">
+				<div class="cardpreview">
+					
+					<table id="top_state_area" width="330">
+						<tr>
+							<td align="left">
+								<img src="/images/left_thing.jpg">
+							</td>
+							<td align="right">
+								<img src="/images/right-thing.jpg">
+							</td>
+						</tr>
+					</table>
+					<div id="state_header_front_outer"><span id="state_header_front">{|full_state|}</span></div> 
+					
+					<div id="card_without" style="display: none; " >
+						<div id="seal_preview_without" style="background-image: url('/images/seals/{|state_lower|}.png');"></div>
+						<div id="name_preview_without">
+							<span id="first_name_preview">{|first_name|}</span> <span id="last_name_preview">{|last_name|}</span>
+						</div>
+						
+						<div id="address_preview_without">
+							<div id="address_1_preview">{|address_1|}</div>
+							<div id="address_2_preview">{|address_2|}</div>
+							<span id="city_preview">{|city|}</span>, <span id="state_preview">{|state|}</span> <span id="zip_preview">{|zip|}</span>
+						</div>
+						
+						<div id="other_data_preview_without">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td align="right"> 
+										D.O.B.:
+									</td>
+									<td align="left">  
+										<span id="dob_month_preview">{|dob_month|}</span>-<span id="dob_day_preview">{|dob_day|}</span>-<span id="dob_year_preview">{|dob_year|}</span>
+									</td>
+								</tr>
+								<tr>
+									<td align="right"> 
+										Patient ID:
+									</td>
+									<td align="left" id="patient_id_preview">
+										420-1234-66
+									</td>
+								</tr>
+								<tr>
+									<td align="right" class="red"> 
+										ISSUED:
+									</td>
+									<td align="left" id="date_issued_preview"  class="red">
+										10-10-2010
+									</td>
+								</tr>
+								<tr>
+									<td align="right"  class="red"> 
+										EXPIRES:
+									</td>
+									<td align="left" id="exp_preview"  class="red">
+										10-10-2011
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					
+					<div id="card_with" >
+						<div id="seal_preview" style="background-image: url('/images/seals/{|state_lower|}.png');"><img src="/images/seals/fade_out_covor.png"></div>
+						<div id="image_preview"><img src="/images/sil_photo.png"></div>
+						<div id="name_preview">
+							<span id="first_name_preview">{|first_name|}</span> <span id="last_name_preview">{|last_name|}</span>
+						</div>
+						
+						<div id="address_preview">
+							<div id="address_1_preview">{|address_1|}</div>
+							<div id="address_2_preview">{|address_2|}</div>
+							<span id="city_preview">{|city|}</span>, <span id="state_preview">{|state|}</span> <span id="zip_preview">{|zip|}</span>
+						</div>
+						
+						<div id="other_data_preview">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td align="right"> 
+										D.O.B.:
+									</td>
+									<td align="left">  
+										<span id="dob_month_preview">{|dob_month|}</span>-<span id="dob_day_preview">{|dob_day|}</span>-<span id="dob_year_preview">{|dob_year|}</span>
+									</td>
+								</tr>
+								<tr>
+									<td align="right"> 
+										Patient ID:
+									</td>
+									<td align="left" id="patient_id_preview">
+										420-1234-66
+									</td>
+								</tr>
+								<tr>
+									<td align="right" class="red"> 
+										ISSUED:
+									</td>
+									<td align="left" id="date_issued_preview"  class="red">
+										10-10-2010
+									</td>
+								</tr>
+								<tr>
+									<td align="right"  class="red"> 
+										EXPIRES:
+									</td>
+									<td align="left" id="exp_preview"  class="red">
+										10-10-2011
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					
+					<div id="state_header_back">
+						State Of {|full_state|}
+					</div>
+					<div id="lower_text">
+						
+					</div>
+					
+				</div>
+				
+			</td>
+		</tr>
+	</table>
+</div>

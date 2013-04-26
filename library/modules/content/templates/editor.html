@@ -1,0 +1,114 @@
+<script>
+	function save()
+	{	
+		var oEditor = CKEDITOR.instances.page_content;
+
+		// Get the editor contents
+		//alert( oEditor.getData() );
+		var page_content = escape(oEditor.getData()); 
+		//alert(page_content);
+		
+		var url = '/admin/content/save/' ;
+		var params = 	'filename={|filename|}' +
+						'&nav='+ nav +
+						'&page_title='+ $('page_title').value +
+						'&meta_keywords='+ $('meta_keywords').value +
+						'&meta_description='+ $('meta_description').value +
+						'&page_content='+ page_content ;
+		
+		//nav_copy
+		new Ajax.Request(url, {method: 'post', parameters: params, onSuccess: function(r) {
+			//alert(r.responseText);
+			$('status').innerHTML = r.responseText;
+		}});
+		
+		
+	}
+	
+	function delete_page()
+	{
+		if (confirm("Are you SURE you want to delete this page? \n This cannot be undone!")) { 
+ 			var url = '/admin/content/delete/{|filename|}' ;
+			
+			//nav_copy
+			new Ajax.Request(url, {method: 'post', onSuccess: function(r) {
+				//alert();
+				window.location = '/admin'
+				//alert(r.responseText);
+				//$('status').innerHTML = r.responseText;
+			}});
+		}
+	
+	}
+	
+	
+	var nav = {|nav|} ;
+	function use_nav(answer)
+	{
+		nav = answer ;
+	}
+	
+	//
+
+</script>
+
+
+<div class="admin_page_header">Editing - {|page_title|}</div> 
+<div style="padding: 25px; ">
+	<div class="form_box">
+	<h3>Page Details</h3>
+		<table cellspacing="10" class="inner">
+			<tr>
+				<td align="right"> 
+					Title:
+				</td>
+				<td> 
+					<input type="text" id="page_title" value="{|page_title|}" size="50">
+				</td>
+			</tr>
+			<tr>
+				<td align="right"> 
+					Keywords:
+				</td>
+				<td> 
+					<input type="text" id="meta_keywords" value="{|meta_keywords|}" size="50">
+				</td>
+			</tr>
+			<tr>
+				<td align="right"> 
+					Description:
+				</td>
+				<td> 
+					<input type="text" id="meta_description" value="{|meta_description|}" size="50">
+				</td>
+			</tr>
+			<tr>
+				<td align="right">
+					Url:	
+				</td>
+				<td>
+					<a target="_new" href="/content/{|filename|}">/content/{|filename|}</a>
+				</tr>
+			</tr>
+			<!--<tr>
+				<td align="right">
+					Navigation Text:	
+				</td>
+				<td>
+					<input type="text" id="nav_copy" value="{|nav_copy|}" size="50">
+				</tr>
+			</tr>-->
+		</table>
+	
+	</div>
+
+	<input type="hidden" value="{|id|}" id="{|id|}">
+	<input type="hidden" value="{|timestamp|}" id="{|timestamp|}">
+	<br>
+	<div style="width: 800px;">{|page_content|}</div>
+	<br>
+	<br>
+	<input type="button" value="Save" onclick="save();">  
+	<input type="button" value="Delete" onclick="delete_page();">
+	<br> <span id="status" class="red"></span>
+</div>

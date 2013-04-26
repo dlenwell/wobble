@@ -1,0 +1,33 @@
+<script type="text/javascript">
+	function delete_this(id)
+	{	
+		if (confirm('Are you sure you want to delete this item?\n\n It cannot be undone!'))
+		{
+			var url = '/admin/legal/delete/' + id ;
+			
+			new Ajax.Request(url, {method: 'post',  onSuccess: function(r) {
+				//alert(r.responseText);
+				window.location = '/admin/legal/manage/';
+			}});
+		}
+	}
+
+</script>
+
+<div class="admin_page_header">Current Legal FAQ's</div> 
+<div style="padding: 25px; ">
+	<div class="form_box">
+	<h3></h3>
+
+
+	<style>
+		.{|GridName|}_ODD
+		{
+			background-color: #ffffff ;  
+		}
+		.{|GridName|}_EVEN
+		{
+		
+		}
+	</style>
+	<table width="740" cellpadding="5">

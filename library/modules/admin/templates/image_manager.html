@@ -1,0 +1,32 @@
+<script type="text/javascript">
+	function delete_this(image)
+	{	
+		if (confirm('Are you sure you want to delete this item?\n\n It cannot be undone!'))
+		{
+			image = image.split('/').reverse()[0];
+			
+			var url = '/admin/image/delete/' + image ;
+			
+			new Ajax.Request(url, {method: 'post',  onSuccess: function(r) {
+				//alert(r.responseText);
+				window.location = '/admin/images/';
+			}});
+		}
+	}
+
+</script>
+<div class="admin_page_header">Manage Images</div> 
+<div style="padding: 25px; ">
+	<div class="form_box">
+		<h3>Upload New ..</h3>
+		<div class="inner">
+			<input type="file" name="file" id="file" /><br>
+			<input type="hidden" name="poo" id="poo" /><br>
+			<input type="submit" name="submit" value="Upload Image" />
+		</div>
+	</div>
+	<br>
+	<div class="lower_editor">
+		{|images|}
+	</div>
+</div>

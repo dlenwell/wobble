@@ -1,0 +1,718 @@
+<script>
+	var isAddressMatch = 'true' ; 
+	var billing_type = 'cc';
+	var shipping_match = false ; 
+	var billing_match = false ; 
+	var has_photo ; 
+	
+	
+	function addressMatch (status)
+	{
+		isAddressMatch == status ;
+			
+		if (status == 'true')
+		{
+			shipping_match = false;
+			Effect.BlindUp('shipping_address_area', { duration: 0.3 });
+		} else { 
+			shipping_match = true;
+			Effect.BlindDown('shipping_address_area', { duration: 0.3 });
+		}	
+		//alert(shipping_match);
+	}
+	
+	
+	function showPaymentOptions () 
+	{
+			
+		var is_valid = true; 
+		
+		if ($('agreetoterms').checked)
+		{
+			$('agreetoterms_error').innerHTML = "" ;
+		} else { 
+			is_valid = false ; 
+			$('agreetoterms_error').innerHTML = '* Agree to continue!';
+		}
+		
+		//shipping validation
+		if (shipping_match == true)
+		{
+			// validate shipping feilds 
+			// shipping_address_1
+			if ($('shipping_address_1').value == '')
+			{
+				is_valid = false ; 
+				$('shipping_address_1_error').innerHTML = "* This is a required field!"; 
+			} else { 
+				$('shipping_address_1_error').innerHTML = ""; 
+			} 
+			
+			// shipping_city
+			if ($('shipping_city').value == '')
+			{
+				is_valid = false ; 
+				$('shipping_city_error').innerHTML = "* This is a required field!"; 
+			} else { 
+				$('shipping_city_error').innerHTML = ""; 
+			} 
+			
+			// shipping_zip		
+			if ($('shipping_zip').value == '')
+			{
+				is_valid = false ; 
+				$('shipping_zip_error').innerHTML = "* Required"; 
+			} else { 
+				$('shipping_zip_error').innerHTML = ""; 
+			} 
+			
+			// shipping_state 
+			if ($('shipping_state').options[$('shipping_state').selectedIndex].value == '')
+			{
+				is_valid = false ; 
+				$('shipping_state_error').innerHTML = "* Required"; 
+			} else { 
+				$('shipping_state_error').innerHTML = ""; 
+			}
+		}
+	
+		if (is_valid)
+		{
+			$('agreetoterms_error').innerHTML = '';
+			Effect.BlindDown('payment_options_area', { duration: 0.3 });
+			Effect.BlindUp('question_area', { duration: 0.3 });
+		}
+	}
+	
+	Event.observe( 
+		window, 
+		'load', 
+		function() { 
+			if ('{|image_preview|}' == 'without')
+			{	
+				has_photo = false; 
+				$('card_without').style.display = 'block';
+			} else {
+				has_photo = true ;
+				$('card_with').style.display = 'block';
+			}
+		} 
+	);
+	
+	
+	function choose_payment(option)
+	{	//payment_type_cc  payment_type_cash payment_type_paypal
+		billing_type = option ;
+		if (option == 'cc' ) 
+		{
+			$('payment_type_cc').style.display = 'block';
+			$('payment_type_cash').style.display = 'none';
+			$('payment_type_paypal').style.display = 'none';
+		}
+		if (option == 'cash' ) 
+		{
+			$('payment_type_cc').style.display = 'none';
+			$('payment_type_cash').style.display = 'block';
+			$('payment_type_paypal').style.display = 'none';
+		}
+		if (option == 'paypal' ) 
+		{
+			$('payment_type_cc').style.display = 'none';
+			$('payment_type_cash').style.display = 'none';
+			$('payment_type_paypal').style.display = 'block';
+		}
+	
+	}
+	
+	
+	function submit_order()
+	{
+		is_valid = true; 
+		
+		// billing validation 
+		if (billing_type == 'cc')
+		{
+			// name_on_card
+			if ($('name_on_card').value == '')
+			{
+				is_valid = false ; 
+				$('name_on_card_error').innerHTML = "* This is a required field!"; 
+			} else { 
+				$('name_on_card_error').innerHTML = ""; 
+			} 
+			
+			// card_number
+			if ($('card_number').value == '')
+			{
+				is_valid = false ; 
+				$('card_number_error').innerHTML = "* This is a required field!"; 
+			} else { 
+				$('card_number_error').innerHTML = ""; 
+			} 
+			
+			// cvv2_code
+			if ($('cvv2_code').value == '')
+			{
+				is_valid = false ; 
+				$('cvv2_code_error').innerHTML = "* This is a required field!"; 
+			} else { 
+				$('cvv2_code_error').innerHTML = ""; 
+			} 
+			
+			// dob_month dob_day dob_year  
+			if ($('exp_month').options[$('exp_month').selectedIndex].value == '' || $('exp_year').options[$('exp_year').selectedIndex].value == ''  )
+			{
+				is_valid = false ; 
+				$('exp_error').innerHTML = "* Please Choose!"; 	
+			} else { 
+				$('exp_error').innerHTML = ""; 
+			}
+			
+			if (billing_match == true)
+			{
+				// validate shipping feilds 
+				// shipping_address_1
+				if ($('shipping_address_1').value == '')
+				{
+					is_valid = false ; 
+					$('shipping_address_1_error').innerHTML = "* This is a required field!"; 
+				} else { 
+					$('shipping_address_1_error').innerHTML = ""; 
+				} 
+				
+				// shipping_city
+				if ($('shipping_city').value == '')
+				{
+					is_valid = false ; 
+					$('shipping_city_error').innerHTML = "* This is a required field!"; 
+				} else { 
+					$('shipping_city_error').innerHTML = ""; 
+				} 
+				
+				// shipping_zip		
+				if ($('shipping_zip').value == '')
+				{
+					is_valid = false ; 
+					$('shipping_zip_error').innerHTML = "* Required"; 
+				} else { 
+					$('shipping_zip_error').innerHTML = ""; 
+				} 
+				
+				// shipping_state 
+				if ($('shipping_state').options[$('shipping_state').selectedIndex].value == '')
+				{
+					is_valid = false ; 
+					$('shipping_state_error').innerHTML = "* Required"; 
+				} else { 
+					$('shipping_state_error').innerHTML = ""; 
+				}
+			}
+		}
+		
+		if (is_valid)
+		{
+			//  we need to save the order 
+			var url = '/card/ajax/submit_order' ;
+			
+			var params = 'billing_type='+ billing_type + "&" +
+						 'shipping_address_1='+ $('shipping_address_1').value  + "&" +
+						 'shipping_address_2='+ $('shipping_address_2').value + "&" +
+				 		 'shipping_city='+ $('shipping_city').value + "&" +
+						 'shipping_zip='+ $('shipping_zip').value + "&" +
+						 'billing_address_1='+ $('billing_address_1').value + "&" +
+						 'billing_address_2='+ $('billing_address_2').value + "&" +
+						 'billing_city='+ $('billing_city').value + "&" +
+						 'billing_zip='+ $('billing_zip').value + "&" +
+						 'name_on_card='+ $('name_on_card').value + "&" +
+						 'card_number='+ $('card_number').value + "&" +
+						 'exp_month='+ $('exp_month').options[$('exp_month').selectedIndex].value + "&" +
+						 'exp_year='+ $('exp_year').options[$('exp_year').selectedIndex].value + "&" +
+						 'cvv2_code='+ $('cvv2_code').value ;
+			
+			new Ajax.Request(url, {method: 'post', parameters: params, onSuccess: function(r) {
+				//window.location = window.location ;\
+				
+				//alert(r.responseText.substring(0,6));
+				
+				switch(billing_type)
+				{
+					case 'paypal':
+						// then redirect to the express pay page..
+						$('payment_options_area').style.display = "none";
+						$('thank_you').style.display ="block";
+						break;
+					
+					case 'cc':
+						// analyze response .. display errors if nescesarry 
+						if (r.responseText.substring(0,6) == 'error')
+						{
+							alert(r.responseText);
+						} else { 
+							$('payment_options_area').style.display = "none";
+							$('thank_you').style.display ="block";
+						}
+						break;
+						
+					case 'cash':
+						// order is saved . and marked as a cash payment. display thank you page!
+						
+						
+						$('thank_you').style.display ="block";
+						break;
+				}
+				
+				
+				
+			}});
+		}	
+	}
+	
+	
+	
+	
+	
+</script>
+<style> 
+	input
+	{
+		padding: 5px;
+	}
+
+</style>
+<div style="padding-top:20px; ">
+	<table width="100%">
+		<tr>
+			<td valign="top" width="345">
+				<h1> Step 3 > Finalize</h1>
+				<div class="cardpreview">
+					<table id="top_state_area" width="330">
+						<tr>
+							<td align="left">
+								<img src="/images/left_thing.jpg">
+							</td>
+							<td align="right">
+								<img src="/images/right-thing.jpg">
+							</td>
+						</tr>
+					</table>
+					<div id="state_header_front_outer"><span id="state_header_front">{|full_state|}</span></div> 
+					
+					<div id="card_without" style="display: none; " >
+						<div id="seal_preview_without" style="background-image: url('/images/seals/{|state_lower|}.png');"></div>
+						<div id="name_preview_without">
+							<span id="first_name_preview">{|first_name|}</span> <span id="last_name_preview">{|last_name|}</span>
+						</div>
+						
+						<div id="address_preview_without">
+							<div id="address_1_preview">{|address_1|}</div>
+							<div id="address_2_preview">{|address_2|}</div>
+							<span id="city_preview">{|city|}</span>, <span id="state_preview">{|state|}</span> <span id="zip_preview">{|zip|}</span>
+						</div>
+						
+						<div id="other_data_preview_without">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td align="right"> 
+										D.O.B.:
+									</td>
+									<td align="left">  
+										<span id="dob_month_preview">{|dob_month|}</span>-<span id="dob_day_preview">{|dob_day|}</span>-<span id="dob_year_preview">{|dob_year|}</span>
+									</td>
+								</tr>
+								<tr>
+									<td align="right"> 
+										Patient ID:
+									</td>
+									<td align="left" id="patient_id_preview">
+										420-1234-66
+									</td>
+								</tr>
+								<tr>
+									<td align="right" class="red"> 
+										ISSUED:
+									</td>
+									<td align="left" id="date_issued_preview"  class="red">
+										10-10-2010
+									</td>
+								</tr>
+								<tr>
+									<td align="right"  class="red"> 
+										EXPIRES:
+									</td>
+									<td align="left" id="exp_preview"  class="red">
+										10-10-2011
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					
+					<div id="card_with" style="display: none; ">
+					
+						<div id="seal_preview" style="background-image: url('/images/seals/{|state_lower|}.png');"><img src="/images/seals/fade_out_covor.png"></div>
+						<div id="image_preview"><img width="100" src="/images/uploaded/user/cropped/{|image_preview|}"></div>
+						
+						<div id="name_preview">
+							<span id="first_name_preview">{|first_name|}</span> <span id="last_name_preview">{|last_name|}</span>
+						</div>
+						
+						<div id="address_preview">
+							<div id="address_1_preview">{|address_1|}</div>
+							<div id="address_2_preview">{|address_2|}</div>
+							<span id="city_preview">{|city|}</span>, <span id="state_preview">{|state|}</span> <span id="zip_preview">{|zip|}</span>
+						</div>
+						
+						<div id="other_data_preview">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td align="right"> 
+										D.O.B.:
+									</td>
+									<td align="left">  
+										<span id="dob_month_preview">{|dob_month|}</span>-<span id="dob_day_preview">{|dob_day|}</span>-<span id="dob_year_preview">{|dob_year|}</span>
+									</td>
+								</tr>
+								<tr>
+									<td align="right"> 
+										Patient ID:
+									</td>
+									<td align="left" id="patient_id_preview">
+										420-1234-66
+									</td>
+								</tr>
+								<tr>
+									<td align="right" class="red"> 
+										ISSUED:
+									</td>
+									<td align="left" id="date_issued_preview"  class="red">
+										10-10-2010
+									</td>
+								</tr>
+								<tr>
+									<td align="right"  class="red"> 
+										EXPIRES:
+									</td>
+									<td align="left" id="exp_preview"  class="red">
+										10-10-2011
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>	
+					
+					<div id="state_header_back">
+						State Of {|full_state|}
+					</div>
+					<div id="lower_text">
+						
+					</div>
+					
+				</div>
+				
+			</td>
+			<td valign="center" width="340" style="padding-right: 15px; ">
+				<div id="payment_options_area" style="display: none; ">
+					Please Choose One: <br>
+					<br>
+					<input type="radio" name="payment_type" onclick="choose_payment('cc');" value="cc"  checked  >Credit Card <br/>
+					<input type="radio" name="payment_type" onclick="choose_payment('paypal');" value="paypal">Paypal <br/>
+					<input type="radio" name="payment_type" onclick="choose_payment('cash');" value="cash"  >Cash / Money Order <br/>
+					<br>
+					<div id="payment_type_cash" style="display: none; ">
+					
+						<b>Print out the email you are about to receive and Mail it along with Cash or money order to: <br>
+						<br>
+						U.M.M.A <br>
+						P.O. box 301 <br>
+						Cotati, CA 94931<br>
+						<br>
+						Click Next to finalize your order order...
+						<br>
+						<input type="button" value="Next >>">
+					</div>
+					<div id="payment_type_paypal" style="display: none; ">
+						<input type="hidden" name="cmd" value="_s-xclick">
+							<input type="hidden" name="hosted_button_id" value="4KLGN848FD6QA">
+							<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+							<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+						
+
+					</div>
+					<div id="payment_type_cc">
+						Name on Card:<span class="red" id="name_on_card_error"></span><br>
+						<input type="text" id="name_on_card" size="40" value=""/><br>
+						Card Number:<span class="red" id="card_number_error"></span><br>
+						<input type="text" id="card_number" size="40" value=""/><br>
+						<table>
+							<tr>
+								<td>
+									Exp Date: <span class="red" id="exp_error"></span><br>
+									<select id="exp_month">
+										<option value="" selected>Month</option>
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+									</select>
+									
+									<select id="exp_year">
+										<option value="" selected>Year</option>
+										<option value="2010">2010</option>
+										<option value="2011">2011</option>
+										<option value="2012">2012</option>
+										<option value="2013">2013</option>
+										<option value="2014">2014</option>
+										<option value="2015">2015</option>
+										<option value="2016">2016</option>
+										<option value="2017">2017</option>
+										<option value="2018">2018</option>
+										<option value="2015">2019</option>
+										<option value="2016">2020</option>
+										<option value="2017">2021</option>
+									</select>
+								</td>
+								<td>
+									CVV2 Code:<a href="http://en.wikipedia.org/wiki/Card_security_code" target="_new"><img src="/images/icons/question_mark.png" border="no"></a>
+									<span class="red" id="cvv2_code_error"></span><br>
+									<input type="text" id="cvv2_code" size="6" value=""/>
+								</td>
+							</tr>
+						</table>
+						<br>
+						Does your billing address match your shipping address? <input type="radio" name="what_shipping" checked onclick="billing_match = false ;$('billing_address').style.display = 'none';"> Yes <input type="radio" name="what_shipping" onclick="billing_match = true;$('billing_address').style.display = 'block';"> No
+						<br>
+						<br>
+						<div style="display: none;" id="billing_address">
+							Billing Address: <span class="red" id="billing_address_1_error"></span><br>
+							<input size="40" type="text" name="billing_address_1" id="billing_address_1"><br>
+							<input size="40" type="text" name="billing_address_2" id="billing_address_2"><br>
+							
+							City: <span class="red" id="billing_city_error"></span><br>
+							<input size="40" type="text" name="billing_city" id="billing_city" ><br>
+							<table cellpadding="0" cellspacing="5">
+								<tr>
+									<td valign="top">
+										State: <span class="red" id="billing_state_error"></span><br>
+										<input type="hidden" id="billing_full_state" name="full_state">
+										<select id="billing_state" name="billing_state"> 
+											<option value="" selected="selected">Select a State</option> 
+											<option value="AL">Alabama</option> 
+											<option value="AK">Alaska</option> 
+											<option value="AZ">Arizona</option> 
+											<option value="AR">Arkansas</option> 
+											<option value="CA">California</option> 
+											<option value="CO">Colorado</option> 
+											<option value="CT">Connecticut</option> 
+											<option value="DE">Delaware</option> 
+											<option value="FL">Florida</option> 
+											<option value="GA">Georgia</option> 
+											<option value="HI">Hawaii</option> 
+											<option value="ID">Idaho</option> 
+											<option value="IL">Illinois</option> 
+											<option value="IN">Indiana</option> 
+											<option value="IA">Iowa</option> 
+											<option value="KS">Kansas</option> 
+											<option value="KY">Kentucky</option> 
+											<option value="LA">Louisiana</option> 
+											<option value="ME">Maine</option> 
+											<option value="MD">Maryland</option> 
+											<option value="MA">Massachusetts</option> 
+											<option value="MI">Michigan</option> 
+											<option value="MN">Minnesota</option> 
+											<option value="MS">Mississippi</option> 
+											<option value="MO">Missouri</option> 
+											<option value="MT">Montana</option> 
+											<option value="NE">Nebraska</option> 
+											<option value="NV">Nevada</option> 
+											<option value="NH">New Hampshire</option> 
+											<option value="NJ">New Jersey</option> 
+											<option value="NM">New Mexico</option> 
+											<option value="NY">New York</option> 
+											<option value="NC">North Carolina</option> 
+											<option value="ND">North Dakota</option> 
+											<option value="OH">Ohio</option> 
+											<option value="OK">Oklahoma</option> 
+											<option value="OR">Oregon</option> 
+											<option value="PA">Pennsylvania</option> 
+											<option value="RI">Rhode Island</option> 
+											<option value="SC">South Carolina</option> 
+											<option value="SD">South Dakota</option> 
+											<option value="TN">Tennessee</option> 
+											<option value="TX">Texas</option> 
+											<option value="UT">Utah</option> 
+											<option value="VT">Vermont</option> 
+											<option value="VA">Virginia</option> 
+											<option value="WA">Washington</option> 
+											<option value="WV">West Virginia</option> 
+											<option value="WI">Wisconsin</option> 
+											<option value="WY">Wyoming</option>
+										</select>
+									</td>
+									<td valign="top">
+										Zip: <span class="red" id="billing_zip_error"></span><br>
+										<input size="7" type="text" name="billing__zip"  id="billing_zip">
+									</td>
+								</tr>
+							</table>
+						</div>
+						<input onclick="submit_order();" type="button" value="Next >>">
+					</div>
+				</div>
+				<div id="question_area" style="font-weight: bold;">
+					<b>Do you wish to send your Medical Marijuana ID to an different address than the address previously entered?</b><br>
+					<input type="radio" name="photo_question" value="yes" checked onclick="addressMatch('true');">
+					<span>No</span>
+					<input type="radio" name="photo_question" value="no"  onclick="addressMatch('false');">
+					Yes
+					<br><br>
+					<input checked type="checkbox" >  Yes send me promotional offers.<br>
+					<span id="agreetoterms_error" style="color: red;"></span><br>
+					<input type="checkbox" id="agreetoterms" onclick="$('agreetoterms_error').innerHTML ='';" >  I agree to the Terms of Service.<br>
+					<div style="color: black; font-size: 9px;  text-shadow: none; filter: DropShadow(Color=#000000, OffX=0, OffY=0) glow(color=#000000, strength=0); background-color: white; padding: 10px; height: 40px; width: 340px; margin: 3px;  overflow: auto; ">
+						UMMA, LLC WEBSITE DISCLAIMER<BR>
+						No warranties<BR>
+						<BR>
+						This website is provided "as is" without any representations or warranties, express or implied UMMA, LLC makes no representations or warranties in relation to this website or the information and materials provided on this website.  
+						<BR><br>
+						Without prejudice to the generality of the foregoing paragraph, UMMA, LLC does not warrant that:
+						<BR><BR>
+						this website will be constantly available, or available at all; or
+						the information on this website is complete, true, accurate or non-misleading.
+						<br><br>
+						Nothing on this website constitutes, or is meant to constitute, advice of any kind.  [If you require advice in relation to any [legal, financial or medical] matter you should consult an appropriate professional.]
+						<br><br>
+						Limitations of liability
+						<br><br>
+						UMMA, LLC will not be liable to you (whether under the law of contact, the law of torts or otherwise) in relation to the contents of, or use of, or otherwise in connection with, this website:
+						<br><br>
+						[to the extent that the website is provided free-of-charge, for any direct loss;]
+						for any indirect, special or consequential loss; or
+						for any business losses, loss of revenue, income, profits or anticipated savings, loss of contracts or business relationships, loss of reputation or goodwill, or loss or corruption of information or data.
+						<br><br>
+						These limitations of liability apply even if UMMA, LLC has been expressly advised of the potential loss.
+						<br><br>
+						Exceptions
+						<br><br>
+						Nothing in this website disclaimer will exclude or limit any warranty implied by law that it would be unlawful to exclude or limit; and nothing in this website disclaimer will exclude or limit UMMA, LLC liability in respect of any:
+						<br><br>
+						death or personal injury caused by UMMA, LLC negligence;
+						fraud or fraudulent misrepresentation on the part of UMMA, LLC; or
+						matter which it would be illegal or unlawful for UMMA, LLC to exclude or limit, or to attempt or purport to exclude or limit, its liability. 
+						<br><br>
+						Reasonableness
+						<br><br>
+						By using this website, you agree that the exclusions and limitations of liability set out in this website disclaimer are reasonable.  
+						<br><br>
+						If you do not think they are reasonable, you must not use this website.
+						<br><br>
+						Other parties
+						<br><br>
+						[You accept that, as a limited liability entity, UMMA, LLC has an interest in limiting the personal liability of its officers and employees.  You agree that you will not bring any claim personally against UMMA, LLC officers or employees in respect of any losses you suffer in connection with the website.]
+						<br><br>
+						[Without prejudice to the foregoing paragraph,] you agree that the limitations of warranties and liability set out in this website disclaimer will protect UMMA, LLC officers, employees, agents, subsidiaries, successors, assigns and sub-contractors as well as UMMA, LLC. 
+						<br><br>
+						Unenforceable provisions
+						<br><br>
+						If any provision of this website disclaimer is, or is found to be, unenforceable under applicable law, that will not affect the enforceability of the other provisions of this website disclaimer.
+						<br><br>
+						Terms and Conditions:
+						<br><br>
+						I, without reservation or restriction understand that this instrument (UMMA, LLC) is not representative of any government affiliation, local, state, or federal, and is not issued or endorsed by any state or federal government agencies or departments.  With that I agree to understand that this instrument is not deceptively similar to any local, state, or federal identification document.  I also attest that I am at least eighteen years of age.  I understand that this instrument's sole purpose is for novelty use only. I agree to accept complete responsibility for any fraudulent use of this instrument as stated in the original agreement between myself and the manufacturer/vendor. The vendor does not provide any warranties of merchantability for a particular purpose or non-infringement. The vendor shall not be liable under any theory or for any damages suffered by the bearer of this instrument. I further affirm and attest that by pressing the accept button below serves as evidence that I, the bearer/purchaser, agree to the aforementioned agreement in its entirety. I understand the instrument I am ordering is for novelty purposes only, and can not be used for real or legal identification purposes of any kind. I also understand that The UMMA, LLC) is not affiliated to any state or federal agency or department, therefore I understand that this novelty ID is not being issued by any state government, law office, agency, or bureau of any kind. Also, I agree that I will not alter or deface the ID in any way. I agree to accept full and complete responsibility for the purchase, and indemnify UMMA, LLC from any liability. This novelty id is NOT a real or legal form of identification. I understand that I accepts full and complete responsibility for any and all consequences arising from any use or misuse, including but not limited to the legal or fraudulent use or misuse of any novelty ID's ordered, from the UMMA, LLC. These Terms and Conditions are legally binding in a court of law. By purchasing this product in the United States, this agreement is governed by the laws of the State of Delaware.  I also agree to have all legal matters/ disputes to be handled in Delaware governed by laws of the State of Delaware.  I agree that any dispute that may arise will be handled in binding arbitration. It has been made clear that UMMA, LLC reserves the absolute right to refuse service to any individual for any reason and does not have to provide reason. I also understand that all sales are final. Furthermore, I agree that by proceeding below, I have read all of the above stated facts and agree to all of the terms and conditions. 
+						ALL THE CARDS SHOWN ON THIS SITE ARE NOVELTY ID's - AND ARE NOT A REAL/LEGAL FORM OF IDENTIFICATION AND ARE NOT ISSUED BY ANY LOCAL, STATE OR FEDERAL DEPARTMENT OR AGENCY.
+						<br><br>
+						All donation made to UMMA LLC will be used at the association’s discretion.  Part or all of the dollars donated will be used to fight for the rights and beliefs of UMMA LLC.  Any donations made to the UMMA are not refundable.  UMMA LLC or its members are not liable or responsible for any results from campaigning, lobbying, or protesting.   
+						<br><br>
+					</div>
+					<div id="shipping_address_area" style="display: none; ">
+						Address: <span class="red" id="shipping_address_1_error"></span><br>
+						<input size="50" type="text" name="shipping_address_1" id="shipping_address_1"><br>
+						<input size="50" type="text" name="shipping_address_2" id="shipping_address_2"><br>
+						
+						City: <span class="red" id="shipping_city_error"></span><br>
+						<input size="50" type="text" name="shipping_city" id="shipping_city" ><br>
+						<table cellpadding="0" cellspacing="5">
+							<tr>
+								<td valign="top">
+									State: <span class="red" id="shipping_state_error"></span><br>
+									<select id="shipping_state" name="shipping_state"> 
+										<option value="" selected="selected">Select a State</option> 
+										<option value="AL">Alabama</option> 
+										<option value="AK">Alaska</option> 
+										<option value="AZ">Arizona</option> 
+										<option value="AR">Arkansas</option> 
+										<option value="CA">California</option> 
+										<option value="CO">Colorado</option> 
+										<option value="CT">Connecticut</option> 
+										<option value="DE">Delaware</option> 
+										<option value="FL">Florida</option> 
+										<option value="GA">Georgia</option> 
+										<option value="HI">Hawaii</option> 
+										<option value="ID">Idaho</option> 
+										<option value="IL">Illinois</option> 
+										<option value="IN">Indiana</option> 
+										<option value="IA">Iowa</option> 
+										<option value="KS">Kansas</option> 
+										<option value="KY">Kentucky</option> 
+										<option value="LA">Louisiana</option> 
+										<option value="ME">Maine</option> 
+										<option value="MD">Maryland</option> 
+										<option value="MA">Massachusetts</option> 
+										<option value="MI">Michigan</option> 
+										<option value="MN">Minnesota</option> 
+										<option value="MS">Mississippi</option> 
+										<option value="MO">Missouri</option> 
+										<option value="MT">Montana</option> 
+										<option value="NE">Nebraska</option> 
+										<option value="NV">Nevada</option> 
+										<option value="NH">New Hampshire</option> 
+										<option value="NJ">New Jersey</option> 
+										<option value="NM">New Mexico</option> 
+										<option value="NY">New York</option> 
+										<option value="NC">North Carolina</option> 
+										<option value="ND">North Dakota</option> 
+										<option value="OH">Ohio</option> 
+										<option value="OK">Oklahoma</option> 
+										<option value="OR">Oregon</option> 
+										<option value="PA">Pennsylvania</option> 
+										<option value="RI">Rhode Island</option> 
+										<option value="SC">South Carolina</option> 
+										<option value="SD">South Dakota</option> 
+										<option value="TN">Tennessee</option> 
+										<option value="TX">Texas</option> 
+										<option value="UT">Utah</option> 
+										<option value="VT">Vermont</option> 
+										<option value="VA">Virginia</option> 
+										<option value="WA">Washington</option> 
+										<option value="WV">West Virginia</option> 
+										<option value="WI">Wisconsin</option> 
+										<option value="WY">Wyoming</option>
+									</select>
+								</td>
+								<td valign="top">
+									Zip: <span class="red" id="shipping_zip_error"></span><br>
+									<input size="7" type="text" name="shipping_zip"  id="shipping_zip">
+									
+								</td>
+								
+								
+							</tr>
+						</table>
+					</div>
+					<input type="button" value="Next >>" onclick="showPaymentOptions();">
+				</div>
+				<div id="thank_you" style="display: none;">
+					Thank you for your order! You will Recieve E-mail confirmation shortly. <br/><br/>Can you please write better copy for this page? 
+					
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

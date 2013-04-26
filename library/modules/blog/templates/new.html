@@ -1,0 +1,78 @@
+<script >
+	function save()
+	{	
+		var oEditor = CKEDITOR.instances.post_content;
+		
+		// Get the editor contents
+		var post_content = escape(oEditor.getData()); 
+		
+		var url = '/admin/blog/new/' ;
+		var params = 	'title='+ $('title').value +
+						'&tags='+ $('tags').value +
+						'&preview='+ $('preview').value +
+						'&post_content='+ post_content +
+						'&preview_image='+ $('preview_image').options[$('preview_image').selectedIndex].value ;
+		
+		new Ajax.Request(url, {method: 'post', parameters: params, onSuccess: function(r) {
+			//alert(r.responseText);
+			window.location = '/admin/blog/manage';
+		}});
+		
+		
+	}
+
+</script>
+<div class="admin_page_header">Add New Post</div> 
+<div style="padding: 25px; ">
+	<div class="form_box" >	
+	
+		<h3>Post Details</h3> 
+		<div style="padding: 10px; ">
+		<table >
+			<tr>
+				<td align="right"> 
+					Title:
+				</td>
+				<td> 
+					<input type="text" id="title" value="" size="50">
+				</td>
+			</tr>
+			<tr>
+				<td align="right"> 
+					Tags:
+				</td>
+				<td> 
+					<input type="text" id="tags" value="" size="50">
+				</td>
+			</tr>
+			<tr>
+				<td align="right"> 
+					Preview Text:
+				</td>
+				<td> 
+					<input type="text" id="preview" value="" size="50">
+				</td>
+			</tr>
+			<tr>
+				<td align="right"> 
+					Preview Image:
+				</td>
+				<td> 
+					{|image_list|} <a href="/admin/images/">Click here to upload</a>
+				</td>
+			</tr>
+			
+		</table>
+		</div>
+	</div>
+	<br>
+	<br>
+	Post Content:<br>
+	<div style="width: 720px; ">
+		{|post_content|}
+	</div>
+	<br>
+	<br>
+	<input type="button" value="Save" onclick="save();"> 
+	<br> <span id="status" class="red"></span>
+</div>

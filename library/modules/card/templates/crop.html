@@ -1,0 +1,140 @@
+<script src="/scripts/cropper/cropper.uncompressed.js" type="text/javascript"></script>
+<script type="text/javascript">
+	function onEndCrop( coords, dimensions ) {
+		$('x1').value = coords.x1;
+		$('y1').value = coords.y1;
+		$('x2').value = coords.x2;
+		$('y2').value = coords.y2;
+		$('width').value = dimensions.width;
+		$('height').value = dimensions.height;
+	}
+	
+	// with a supplied ratio
+	Event.observe( 
+		window, 
+		'load', 
+		function() { 
+			new Cropper.Img('testImage',{ratioDim: { x: 129, y: 180 }, displayOnInit: true, onEndCrop: onEndCrop}) ;  
+		} 
+	);
+</script>
+<style type="text/css">
+	label { 
+		clear: left;
+		margin-left: 50px;
+		float: left;
+		width: 5em;
+	}
+	
+	#testWrap {
+		margin: 20px 0 0 50px; /* Just while testing, to make sure we return the correct positions for the image & not the window */
+	}
+</style>
+
+<div style="padding-top:20px; ">
+	<b> Step 2b > Crop Photo </b>
+	<br>
+	<br>
+	<table width="100%">
+		<tr>
+			<td valign="top">
+				<style> 
+					input
+					{
+						padding: 5px;
+					}
+				
+				</style>
+				<div>
+					<div id="testWrap">
+						<img src="/images/uploaded/user/{|temp_image|}" alt="test image" id="testImage" name="testImage" />
+					</div>
+					
+					
+					<input type="hidden" name="x1" id="x1" value="{|x1|}" />
+					<input type="hidden" name="y1" id="y1" value="{|y1|}" />
+					<input type="hidden" name="x2" id="x2" value="{|x2|}" />
+					<input type="hidden" name="y2" id="y2" value="{|y2|}" />
+					<input type="hidden" name="width" id="width" value="{|width|}" />
+					<input type="hidden" name="height" id="height" value="{|height|}" />
+					<br><br><input type="submit" value="Next >>" onclick="">
+									
+				</div>
+			</td>
+			<td valign="top">
+				<div class="cardpreview">
+					<div id="seal_preview" style="background-image: url('/images/seals/{|state_lower|}.png');"><img src="/images/seals/fade_out_covor.png"></div>
+					<div id="image_preview"><img src="/images/sil_photo.png"></div>
+					<table id="top_state_area" width="330">
+						<tr>
+							<td align="left">
+								<img src="/images/left_thing.jpg">
+							</td>
+							<td align="right">
+								<img src="/images/right-thing.jpg">
+							</td>
+						</tr>
+					</table>
+					<div id="state_header_front_outer"><span id="state_header_front">{|full_state|}</span></div> 
+					
+					<div id="name_preview">
+						<span id="first_name_preview">{|first_name|}</span> <span id="last_name_preview">{|last_name|}</span>
+					</div>
+					
+					<div id="address_preview">
+						<div id="address_1_preview">{|address_1|}</div>
+						<div id="address_2_preview">{|address_2|}</div>
+						<span id="city_preview">{|city|}</span>, <span id="state_preview">{|state|}</span> <span id="zip_preview">{|zip|}</span>
+					</div>
+					
+					<div id="other_data_preview">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td align="right"> 
+									D.O.B.:
+								</td>
+								<td align="left">  
+									<span id="dob_month_preview">{|dob_month|}</span>-<span id="dob_day_preview">{|dob_day|}</span>-<span id="dob_year_preview">{|dob_year|}</span>
+								</td>
+							</tr>
+							<tr>
+								<td align="right"> 
+									Patient ID:
+								</td>
+								<td align="left" id="patient_id_preview">
+									420-1234-66
+								</td>
+							</tr>
+							<tr>
+								<td align="right" class="red"> 
+									ISSUED:
+								</td>
+								<td align="left" id="date_issued_preview"  class="red">
+									10-10-2010
+								</td>
+							</tr>
+							<tr>
+								<td align="right"  class="red"> 
+									EXPIRES:
+								</td>
+								<td align="left" id="exp_preview"  class="red">
+									10-10-2011
+								</td>
+							</tr>
+						</table>
+					</div>
+					
+					
+					<div id="state_header_back">
+						State Of {|full_state|}
+					</div>
+					<div id="lower_text">
+						
+					</div>
+					
+				</div>
+				
+			</td>
+		</tr>
+	</table>
+</div>

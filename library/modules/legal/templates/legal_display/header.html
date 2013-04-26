@@ -1,0 +1,28 @@
+<h1>Legal Information</h1>
+<div id="faqs">
+	<script  language="JavaScript"> 
+			
+		var current_question = 0 ;
+		
+		function change_question(new_question)
+		{
+			//alert('test');
+			if (current_question != new_question)
+			{
+				Effect.BlindDown(new_question, { duration: 0.3 });
+			
+			
+				if (current_question != 0)
+				{
+					Effect.BlindUp(current_question, { duration: 0.3 });
+				}
+			
+				current_question = new_question ;
+			} else { 
+				Effect.BlindUp(new_question, { duration: 0.3 });
+				current_question = 0 ;
+			}
+		}
+		
+	</script> 
+ 	

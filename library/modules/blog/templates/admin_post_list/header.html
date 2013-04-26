@@ -1,0 +1,16 @@
+<script>
+	
+	function delete_post(id)
+	{
+		var url = '/admin/blog/delete/' ;
+		var params = 	'id='+ id ;
+		
+		new Ajax.Request(url, {method: 'post', parameters: params, onSuccess: function(r) {
+			window.location = window.location ; 
+	
+		}});
+	}
+</script>
+<div class="admin_page_header">Current Blog Posts</div> 
+<div style="padding: 25px; ">
+<table>

@@ -1,0 +1,15 @@
+	<li id="item_{|id|}">
+		<table width="740" cellpadding="5">	
+			<tr class="{|GridName|}_{|RowClass|}">
+				<td>	
+					{|display_text|}
+				</td>
+				<td align="center" width="40">
+					<a onclick="delete_entry({|id|}) ; return false; " href="#"><img src="/images/icons/Trash-icon.png" width="20" border="no"></a> 
+				</td>	
+				<td align="center" width="40">
+					<a href="#" onclick="edit_entry({|id|}, '{|display_text|}', '{|target|}', '{|url|}');  return false;"><img src="/images/icons/Edit-Icon.png" width="20" border="no"></a>
+				</td>
+			</tr>
+		</table>
+	</li>

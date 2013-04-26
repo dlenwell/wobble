@@ -1,0 +1,311 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	font-family: arial, helvetica, sans-sarif; 
+	background-color: #244672 ; 
+	
+}
+
+input, textarea
+{
+	font-family: arial, helvetica, sans-sarif; 
+	font-size: 12px; 
+	
+	padding: 3px; 
+	
+}
+
+a:link, a:visited, a:active{
+	text-decoration: none;
+	
+}
+a:hover {
+	text-decoration: underline;
+}
+
+a.white:link, a.white:visited, a.white:active{
+	text-decoration: none;
+	color: white; 
+}
+a.white:hover {
+	text-decoration: underline;
+}
+
+#header
+{
+	background-color: #39669d ; 
+	border-top: 2px solid #005e7f;
+	font-family: Georgia ;
+	color: white;
+	margin: 0px auto 0px auto; 
+	position: relative;
+	padding: 15px;
+	padding: 0px;
+	width: 100%;
+	height: 80px; 
+	
+}
+#content
+{
+	position: relative; 
+	margin: 0px auto; 
+	width: 100%;
+}
+
+#top_nav 
+{
+	
+	height: 18px;
+	padding: 3px;
+	color: white; 
+	background-color: #005e7f;
+	padding-right: 15px;
+	text-align: right;
+}
+
+#left_nav 
+{
+	background-color: #65a5bd;
+	width: 200px; 
+	
+}
+#left_nav_content
+{
+	padding: 0px;
+}
+
+
+#editor
+{
+	background-color: #e7e7e7;
+	right: 0px; 
+	position: relative; 
+	margin: 0px;
+	
+}
+#editor_content
+{
+	padding: 0px;
+}
+
+.small
+{
+	font-size: 10px;
+}
+
+.red{ color: red;}
+
+
+
+.surrounding_box
+{
+	border: 2px solid white ; 
+}
+
+
+
+.admin_menu_header
+{
+	background: #999; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#005e7f', endColorstr='#65a5bd'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#005e7f), to(#65a5bd)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #005e7f,  #65a5bd); /* for firefox 3.6+ */
+	
+	padding: 15px;
+	padding-left: 20px; 
+	color: white ; 
+	text-shadow: 2px 2px 2px #65a5bd;
+	
+	font-weight: bold; 
+	
+	
+	
+}
+
+.admin_page_header
+{
+		background: #999; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#999999', endColorstr='#e7e7e7'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#999999), to(#e7e7e7)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #999999,  #e7e7e7); /* for firefox 3.6+ */
+	
+	padding: 15px;
+	padding-left: 20px; 
+	color: black ; 
+	text-shadow: 2px 2px 2px #e7e7e7;
+	
+	font-weight: bold; 
+	
+	
+
+}
+
+.form_box
+{
+	border: 2px solid #e7e7e7 ; 
+	padding: 0px; 
+	display: inline-block; 
+	margin: 0px 0px 25px 0px; 
+	background-color: #f7f7f7 ; 
+}
+
+.form_box .inner
+{
+	padding: 0px 25px 20px 25px ; 
+}
+
+.form_box h3
+{
+	background: #999; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e7e7e7', endColorstr='#f7f7f7'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#e7e7e7), to(#f7f7f7)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #e7e7e7,  #f7f7f7); /* for firefox 3.6+ */
+	
+	font-size: 13px; 
+	padding: 10px;
+	padding-left: 20px; 
+	color: black ; 
+	text-shadow: 2px 2px 2px #f7f7f7;
+	margin: 0px; 
+	font-weight: bold; 
+	
+	
+}
+
+
+
+.admin_menu_items
+{
+	padding: 0px 20px 20px 20px; 
+	
+}
+
+
+.cardpreview
+					{
+						width: 346px; 
+						height: 436px; 
+						
+						background-image: url('/images/card_preview.png'); 
+						
+						position: relative; 
+					}	
+					
+					#seal_preview
+					{
+						width: 150px;
+						height: 150px;
+						
+						background-image: url('/images/seals/ca.png'); 
+						
+						z-index: 100; 
+						
+						position: absolute; 
+						
+						left: 130px ; 
+						top: 40px; 
+						
+					}
+					
+					#state_header_back
+					{
+						color: #233c65 ;
+						text-align: center ; 
+						font-family: 'Trajan Pro', Georgia ;
+						font-size: 22px; 
+						text-shadow: none; 
+						
+						position: absolute; 
+						
+						top: 245px;
+						width: 346px; 
+						
+						z-index: 200; 
+					}
+					
+					#image_preview
+					{
+						position: absolute; 
+						
+						left: 20px ; 
+						top: 45px; 
+						z-index: 200; 
+						
+					}
+					
+					#state_header_front
+					{
+						color: #233c65 ;
+						text-align: center ; 
+						font-family: 'Trajan Pro', Georgia ;
+						font-size: 30px; 
+						text-shadow: none; 
+						
+						position: absolute; 
+						
+						top: 10px; 
+						width: 346px; 
+						
+						z-index: 200; 
+					}
+					
+					#name_preview
+					{
+						font-family: Geneva ;
+						text-shadow: 2px 2px 2px #fff;
+						
+						color: black; 
+						font-size: 26px; 
+						
+						position: absolute; 
+						left: 125px;
+						top: 40px; 
+						width: 207px; 
+						height: 27px; 
+						
+						overflow: hidden; 
+						z-index: 200; 
+					}
+					
+					#address_preview
+					{
+						font-family: Geneva ;
+						text-shadow: 2px 2px 2px #fff;
+						
+						color: black; 
+						font-size: 12px; 
+						
+						position: absolute; 
+						left: 125px;
+						top: 70px ; 
+						width: 207px ; 
+						overflow: hidden; 
+						z-index: 200; 
+					}
+					
+					#other_data_preview
+					{
+						font-family: Geneva ;
+						text-shadow: 2px 2px 2px #fff;
+						
+						color: black; 
+						font-size: 12px; 
+						
+						position: absolute; 
+						left: 125px;
+						top: 120px ; 
+						width: 207px ; 
+						
+						z-index: 200; 
+						overflow: hidden; 
+					}
+					
+					.red
+					{
+						color: red ; 
+					}
+					.photo
+					{
+						display: block; 
+						margin: 10px; 
+					}

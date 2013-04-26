@@ -1,0 +1,80 @@
+<script >
+	function save()
+	{	
+		var oEditor = CKEDITOR.instances.page_content;
+		
+		// Get the editor contents
+		var page_content = escape(oEditor.getData()); 
+		
+		var url = '/admin/content/new/' ;
+		var params = 	'filename='+ $('filename').value +
+						'&page_title='+ $('page_title').value +
+						'&meta_keywords='+ $('meta_keywords').value +
+						'&meta_description='+ $('meta_description').value +
+						'&page_content='+ page_content ;
+		
+		new Ajax.Request(url, {method: 'post', parameters: params, onSuccess: function(r) {
+			//alert(r.responseText);
+			window.location = '/admin/content/edit/' + $('filename').value ;
+		}});
+		
+		
+	}
+
+	function cleanfilename(inString)
+	{
+		$('filenamefeedback').innerHTML = '* Spaces have been replaced with hyphens.<br> This makes reading the url easier. ';
+		return inString.replace(/ /gi, "-") ;
+	
+		
+	}
+</script>
+
+<div class="admin_page_header">Add New Content Page</div> 
+<div style="padding: 25px; ">
+	<div class="form_box">	
+		<h3>Page Details</h3>
+		<table cellspacing="10" class="inner">
+			<tr>
+				<td align="right" valign="top"> 
+					File Name:
+				</td>
+				<td> 
+					<input type="text" id="filename" value="" onblur="this.value = cleanfilename(this.value);" size="50"><br>
+					<span style="font-size: 10px; color: red ; " id="filenamefeedback"></span>
+				</td>
+			</tr>
+			<tr>
+				<td align="right"> 
+					Title:
+				</td>
+				<td> 
+					<input type="text" id="page_title" value="" size="50">
+				</td>
+			</tr>
+			<tr>
+				<td align="right"> 
+					Keywords:
+				</td>
+				<td> 
+					<input type="text" id="meta_keywords" value="" size="50">
+				</td>
+			</tr>
+			<tr>
+				<td align="right"> 
+					Description:
+				</td>
+				<td> 
+					<input type="text" id="meta_description" value="" size="50">
+				</td>
+			</tr>
+			
+		</table>
+	</div>
+	<br>
+	<div style="width: 800px;">{|page_content|}</div>
+	<br>
+	<br>
+	<input type="button" value="Save" onclick="save();"> <!-- <input type="button" value="Preview" onclick="preview();">-->
+	<br> <span id="status" class="red"></span>
+</div>

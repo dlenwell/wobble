@@ -1,0 +1,90 @@
+<script>
+	function save()
+	{	
+		var oEditor = CKEDITOR.instances.post_content;
+
+		// Get the editor contents
+		//alert( oEditor.getData() );
+		var post_content = escape(oEditor.getData()); 
+		//alert(page_content);
+		
+		var url = '/admin/blog/save/' ;
+		var params = 	'title='+ $('title').value +
+						'&id={|id|}' +
+						'&tags='+ $('tags').value +
+						'&preview='+ $('preview').value +
+						'&post_content='+ post_content +
+						'&preview_image='+ $('preview_image').options[$('preview_image').selectedIndex].value ;
+		
+		new Ajax.Request(url, {method: 'post', parameters: params, onSuccess: function(r) {
+			//alert(r.responseText);
+			$('status').innerHTML = r.responseText;
+		}});
+		
+		
+	}
+	
+</script>
+<div class="admin_page_header">Edit {|title|}</div> 
+<div style="padding: 25px; ">
+	<div class="form_box" >	
+		<h3>Post Details</h3> 
+		<div style="padding: 10px; ">
+			<table>
+				<tr>
+					<td align="right"> 
+						Title:
+					</td>
+					<td> 
+						<input type="text" id="title" value="{|title|}" size="50">
+					</td>
+				</tr>
+				<tr>
+					<td align="right"> 
+						Tags:
+					</td>
+					<td> 
+						<input type="text" id="tags" value="{|tags|}" size="50">
+					</td>
+				</tr>
+				<tr>
+					<td align="right"> 
+						Preview Text:
+					</td>
+					<td> 
+						<input type="text" id="preview" value="{|preview|}" size="50">
+					</td>
+				</tr>
+				<tr>
+					<td align="right"> 
+						Preview Image:
+					</td>
+					<td> 
+						{|image_list|} <a href="/admin/images/">Click here to upload</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="right"> 
+						Post Link:
+					</td>
+					<td> 
+						<a href="/blog/view/{|id|}/{|title|}">/blog/view/{|id|}</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<input type="hidden" value="{|id|}" id="{|id|}">
+	<input type="hidden" value="{|timestamp|}" id="{|timestamp|}">
+	<br>
+	<br>
+	Post Content:<br>
+	<div style="width: 700px; ">
+		{|post_content|}
+	</div>
+	<br>
+	<br>
+	<input type="button" value="Save" onclick="save();"> <!-- <input type="button" value="Preview" onclick="preview();">-->
+	<br> <span id="status" class="red"></span>
+</div>

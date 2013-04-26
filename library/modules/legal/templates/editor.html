@@ -1,0 +1,44 @@
+<script >
+	function save()
+	{	
+		var url = '/admin/legal/save/{|id|}' ;
+		var params = 	'question='+ encodeURIComponent($('question').value) +
+						'&answer='+ encodeURIComponent($('answer').value)  ;
+		
+		new Ajax.Request(url, {method: 'post', parameters: params, onSuccess: function(r) {
+			//alert(r.responseText);
+			//window.location = '/admin/faq/manage/';
+			
+			$('status').innerHTML = r.responseText ;
+		}});
+	}
+
+</script>
+
+<div class="admin_page_header">Editing Legal FAQ</div> 
+<div style="padding: 25px; ">
+	<div class="form_box">
+		<h3></h3>
+		<table class="inner" cellspacing="10">
+			<tr>
+				<td align="right"> 
+					Question:
+				</td>
+				<td> 
+					<input type="text" id="question" value="{|question|}" size="50">
+				</td>
+			</tr>
+			<tr>
+				<td align="right" valign="top"> 
+					Answer:
+				</td>
+				<td> 
+					<textarea id="answer" cols="60" rows="10">{|answer|}</textarea>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<input type="button" value="Save" onclick="save();"> <!-- <input type="button" value="Preview" onclick="preview();">-->
+	<br> <span id="status" class="red"></span>
+</div>

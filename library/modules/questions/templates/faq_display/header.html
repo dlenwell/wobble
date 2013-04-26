@@ -1,0 +1,43 @@
+</div>
+<script  language="JavaScript"> 
+	var current_question = 0 ;
+	
+	function change_question(new_question)
+	{
+		if (current_question != new_question)
+		{
+			Effect.BlindDown(new_question, { duration: 0.3 });
+			if (current_question != 0)
+			{
+				Effect.BlindUp(current_question, { duration: 0.3 });
+			}
+		
+			current_question = new_question ;
+		} else { 
+			Effect.BlindUp(new_question, { duration: 0.3 });
+			current_question = 0 ;
+		}
+	}
+</script> 
+<div class="wrapper col3">
+  <div id="breadcrumb">
+    <ul>
+      <li class="first">You Are Here</li>
+      <li>&#187;</li>
+      <li><a href="/">Home</a></li>
+      <li>&#187;</li>
+      <li class="current"><a href="/questions">Questions</a></li>
+    </ul>
+  </div>
+</div>
+<div class="wrapper col4">
+  	<div id="container">
+  			<div style="float: right;">
+  				<img src="/images/magnifying-glass.jpg">
+  				<br><br><br>
+  			</div>
+  			<div style="width: 500px;">
+			<h1>Frequently Asked Questions</h1>
+
+			
+			

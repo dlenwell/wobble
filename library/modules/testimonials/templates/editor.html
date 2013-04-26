@@ -1,0 +1,44 @@
+<script >
+	function save()
+	{	
+		var url = '/admin/faq/save/{|id|}' ;
+		var params = 	'question='+ encodeURIComponent($('question').value) +
+						'&answer='+ encodeURIComponent($('answer').value)  ;
+		
+		new Ajax.Request(url, {method: 'post', parameters: params, onSuccess: function(r) {
+			//alert(r.responseText);
+			//window.location = '/admin/faq/manage/';
+			
+			$('status').innerHTML = r.responseText ;
+		}});
+	}
+
+</script>
+
+<div>
+	<b>Edit FAQ</b> 
+	<br>
+	<br>
+	<table>
+		<tr>
+			<td align="right"> 
+				Question:
+			</td>
+			<td> 
+				<input type="text" id="question" value="{|question|}" size="50">
+			</td>
+		</tr>
+		<tr>
+			<td align="right"> 
+				Answer:
+			</td>
+			<td> 
+				<textarea id="answer" cols="50" rows="4">{|answer|}</textarea>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<input type="button" value="Save" onclick="save();"> <!-- <input type="button" value="Preview" onclick="preview();">-->
+	<br> <span id="status" class="red"></span>
+</div>

@@ -1,0 +1,45 @@
+<style>
+	#news_header
+	{
+		display: none;
+	}
+	#right_column
+	{
+		top: 305px;
+		
+		
+	}
+	#large-image
+	{
+		z-index: 800;
+		position: absolute; 
+		top: -1px; 
+		left: -60px;
+		width: 1212px;
+		height: 690px;
+		background-image: url('/images/news_image.png');
+	}
+</style>
+<div style="">
+	<h1>{|title|}</h1>
+	{|formated_date|}<br><br>
+	<div style="color: white;">
+		<img width="150" style="float: left; margin: 0px 10px 10px 0px;" src="{|preview_image|}">
+		{|post|}
+	</div>
+	<br><br>
+	<div><br><br>
+		<table width="100%">
+			<tr>
+				<td>
+					{|previous_link|}
+				</td>
+				<td align="right">
+					{|next_link|}
+				</td>
+				
+			</tr>
+		</table>
+	</div>
+	<br><br>
+</div>
